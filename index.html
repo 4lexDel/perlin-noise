@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P5.js Getstarted</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/p5@1.8.0/lib/p5.js"></script> -->
+    <script src="p5.js"></script>
+</head>
+
+<body oncontextmenu="return false">
+    <script>
+        let noiseLevel = 255;
+        let noiseScale = 0.015;
+        let res = 3;
+        let colored = true;
+
+        function setup() {
+            createCanvas(1200, 500);
+
+            generatePerlinNoise();
+        }
+
+        function draw() {
+            if (mouseIsPressed === true) {
+                console.log("mouse");
+                if (mouseButton === LEFT) {
+                    console.log("left");
+                    noiseScale += 0.005;
+                    generatePerlinNoise();
+                }
+                if (mouseButton === RIGHT) {
+                    console.log("right");
+                    noiseScale -= 0.005;
+                    generatePerlinNoise();
+                }
+                if (mouseButton === CENTER) {
+                    noiseLevel -= 10;
+                    colored = !colored;
+                    generatePerlinNoise();
+                }
+            }
+        }
+
+        function generatePerlinNoise() {
+            noStroke();
+            for (let y = 0; y < height; y += res) {
+                for (let x = 0; x < width / 4; x += res) {
+                    // Scale input coordinates.
+                    let nx = noiseScale * x;
+                    let ny = noiseScale * y;
+
+                    // Compute noise value.
+                    noiseDetail(6, 0.25);
+                    let noiseVal = noise(nx, ny);
+                    let c = colored ? getColor(noiseVal) : noiseLevel * noiseVal;
+                    // Render left side.
+                    fill(c);
+                    rect(x, y, res, res)
+                        // point(x, y);
+
+                    // Compute noise value.
+                    noiseDetail(4, 0.5);
+                    noiseVal = noise(nx, ny);
+                    c = colored ? getColor(noiseVal) : noiseLevel * noiseVal;
+                    // Render right side.
+                    fill(c);
+                    rect(x + width / 4, y, res, res)
+
+                    // Compute noise value.
+                    noiseDetail(6, 0.57);
+                    noiseVal = noise(nx, ny);
+                    c = colored ? getColor(noiseVal) : noiseLevel * noiseVal;
+                    // Render right side.
+                    fill(c);
+                    rect(x + 2 * width / 4, y, res, res)
+
+                    // Compute noise value.
+                    noiseDetail(6, 0.6);
+                    noiseVal = noise(nx, ny);
+                    c = colored ? getColor(noiseVal) : noiseLevel * noiseVal;
+                    // Render right side.
+                    fill(c);
+                    rect(x + 3 * width / 4, y, res, res)
+                }
+            }
+            noFill();
+            stroke(50);
+            strokeSize = 5;
+            strokeWeight(strokeSize);
+            rect(strokeSize / 2, strokeSize / 2, width / 4 - strokeSize, height - strokeSize);
+            rect(strokeSize / 2, strokeSize / 2, 2 * width / 4 - strokeSize, height - strokeSize);
+            rect(strokeSize / 2, strokeSize / 2, 3 * width / 4 - strokeSize, height - strokeSize);
+            rect(strokeSize / 2, strokeSize / 2, width - strokeSize, height - strokeSize);
+        }
+
+        function getColor(val) {
+            if (val < 0.2) {
+                return color("#568AD1"); //dark blue
+            } else if (val < 0.5) {
+                return color("#3175D1"); //cyan
+            } else if (val < 0.6) {
+                return color("#FFC300"); //yellow
+            } else if (val < 0.7) {
+                return color("#66CC85"); //light green
+            } else if (val < 0.8) {
+                return color("#149B25"); //green
+            } else if (val < 0.9) {
+                return color("#7E7E7E"); //grey
+            } else if (val < 1) {
+                return color("#393939"); //grey
+            }
+            return color("white"); //white
+
+        }
+
+        // function draw() {
+        //     background(220);
+        //     if (mouseIsPressed) {
+        //         fill(0);
+        //     } else {
+        //         fill(255);
+        //     }
+        //     ellipse(mouseX, mouseY, 80, 80);
+        // }
+    </script>
+</body>
+
+</html>
