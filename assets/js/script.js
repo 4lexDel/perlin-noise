@@ -1,7 +1,10 @@
 /** ---------------------------------- NOISE LOGIC ---------------------------------- */
 
-let noiseScale = 0.015;
-let res = 3;
+var noiseScale = 0.015;
+var res = 3;
+var nbNoiseDetail = 4;
+var displaySequence = [.2, .5, .6, .7, .8, .9, 1];
+var colorSequence = ["#568AD1", "#3175D1", "#FFC300", "#66CC85", "#149B25", "#7E7E7E", "#393939"];
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -15,7 +18,7 @@ function windowResized() {
 }
 
 function generatePerlinNoise() {
-    noiseDetail(4, 0.5);
+    noiseDetail(nbNoiseDetail, 0.5);
     noStroke();
     for (let y = 0; y < height; y += res) {
         for (let x = 0; x < width; x += res) {
@@ -37,21 +40,25 @@ function generatePerlinNoise() {
 }
 
 function getColor(val) {
-    if (val < 0.2) {
-        return color("#568AD1"); //dark blue
-    } else if (val < 0.5) {
-        return color("#3175D1"); //cyan
-    } else if (val < 0.6) {
-        return color("#FFC300"); //yellow
-    } else if (val < 0.7) {
-        return color("#66CC85"); //light green
-    } else if (val < 0.8) {
-        return color("#149B25"); //green
-    } else if (val < 0.9) {
-        return color("#7E7E7E"); //grey
-    } else if (val < 1) {
-        return color("#393939"); //grey
+    for (let i = 0; i < displaySequence.length; i++) {
+        if (val < displaySequence[i]) return color(colorSequence[i]);
     }
-    return color("white"); //white
 
+    return color("white"); //white
 }
+
+// if (val < 0.2) {
+//     return color("#568AD1"); //dark blue
+// } else if (val < 0.5) {
+//     return color("#3175D1"); //cyan
+// } else if (val < 0.6) {
+//     return color("#FFC300"); //yellow
+// } else if (val < 0.7) {
+//     return color("#66CC85"); //light green
+// } else if (val < 0.8) {
+//     return color("#149B25"); //green
+// } else if (val < 0.9) {
+//     return color("#7E7E7E"); //grey
+// } else if (val < 1) {
+//     return color("#393939"); //grey
+// }
