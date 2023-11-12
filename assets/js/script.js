@@ -1,9 +1,9 @@
 /** ---------------------------------- NOISE LOGIC ---------------------------------- */
 
 var noiseScale = 0.015;
-var res = 3;
+var res = 2;
 var nbNoiseDetail = 4;
-var displaySequence = [.2, .55, .6, .7, .8, .9, 1];
+var displaySequence = [.3, .55, .6, .7, .8, .9, 1];
 var colorSequence = ["#568AD1", "#3175D1", "#FFC300", "#66CC85", "#149B25", "#7E7E7E", "#393939"];
 
 function setup() {

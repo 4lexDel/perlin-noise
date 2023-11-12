@@ -3,7 +3,7 @@
 var sliderDisplay = document.getElementById('slider-display-scale');
 
 noUiSlider.create(sliderDisplay, {
-    start: [.2, .55, .6, .7, .8, .9, 1],
+    start: [.3, .55, .6, .7, .8, .9, 1],
     connect: [true, true, true, true, true, true, true, false],
     range: {
         'min': [0],
@@ -58,7 +58,7 @@ sliderZoom.noUiSlider.on('change', function(value) {
 var sliderResolution = document.getElementById('slider-resolution');
 
 noUiSlider.create(sliderResolution, {
-    start: [3],
+    start: [2],
     connect: [true, false],
     range: {
         'min': [1],
