@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.css" integrity="sha512-MKxcSu/LDtbIYHBNAWUQwfB3iVoG9xeMCm32QV5hZ/9lFaQZJVaXfz9aFa0IZExWzCpm7OWvp9zq9gVip/nLMg==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js" integrity="sha512-UOJe4paV6hYWBnS0c9GnIRH8PLm2nFK22uhfAvsTIqd3uwnWsVri1OPn5fJYdLtGY3wB11LGHJ4yPU1WFJeBYQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <link rel="stylesheet" href="assets/nouislider.min.css">
+    <script src="assets/nouislider.min.js"></script>
+</head>
+
+<body>
+    <style>
+        #slider-color {
+            width: 600px;
+        }
+        
+        .c-1-color {
+            background: red;
+        }
+        
+        .c-2-color {
+            background: orange;
+        }
+        
+        .c-3-color {
+            background: yellow;
+        }
+        
+        .c-4-color {
+            background: green;
+        }
+        
+        .c-5-color {
+            background: blue;
+        }
+    </style>
+    <label>Test slider</label><br><br>
+
+    <div id="slider-color"></div>
+    <br>
+    <div id="slider-value"></div>
+
+    <script>
+        var slider = document.getElementById('slider-color');
+
+        noUiSlider.create(slider, {
+            start: [.2, .5, .7, 1],
+            connect: [true, true, true, true, false],
+            range: {
+                'min': [0],
+                'max': [1]
+            },
+            step: 0.05,
+            tooltips: true,
+        });
+
+        var connect = slider.querySelectorAll('.noUi-connect');
+        var classes = ['c-1-color', 'c-2-color', 'c-3-color', 'c-4-color', 'c-5-color'];
+
+        for (var i = 0; i < connect.length; i++) {
+            connect[i].classList.add(classes[i]);
+        }
+
+        var sliderValue = document.getElementById('slider-value');
+        slider.noUiSlider.on('update', function(values) {
+            var sliderValue = document.getElementById('slider-value');
+            sliderValue.innerHTML = values.join(' - ');
+        });
+    </script>
+</body>
+
+</html>
