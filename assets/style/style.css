@@ -96,3 +96,17 @@ canvas {
 .detail-color {
     background-color: green;
 }
+
+#slider-display-scale .noUi-handle {
+    width: 10px !important;
+    right: -5px !important;
+    /*  must be (width / 2) * -1*/
+}
+
+#slider-display-scale .noUi-handle:after {
+    content: none !important;
+}
+
+#slider-display-scale .noUi-handle:before {
+    content: none !important;
+}
